@@ -1,13 +1,10 @@
+/* eslint-disable import/extensions */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './styles/index.css';
 import App from './components/App.jsx';
 
 ReactDOM.render(
-  // <React.StrictMode>
-    <App />
-  // </React.StrictMode>
-  ,
-  document.getElementById('Walker')
+  <App />,
+  document.getElementById('Walker'),
 );
-

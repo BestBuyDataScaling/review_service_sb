@@ -1,3 +1,5 @@
+/* eslint-disable no-path-concat */
+/* eslint-disable prefer-template */
 module.exports = {
   entry: __dirname + '/client/src/index.jsx',
   module: {
@@ -8,18 +10,18 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-react', '@babel/preset-env']
-          }
-        }
+            presets: ['@babel/preset-react', '@babel/preset-env'],
+          },
+        },
       },
       {
         test: [/\.css$/],
-        use:['style-loader', 'css-loader']
-      }
-    ]
+        use: ['style-loader', 'css-loader'],
+      },
+    ],
   },
-   output: {
+  output: {
     filename: 'bundle.js',
-    path: __dirname + '/client/dist'
-  }
+    path: __dirname + '/client/dist',
+  },
 };

@@ -1,3 +1,4 @@
+/* eslint-disable react/prefer-stateless-function */
 import React from 'react';
 import {
   Accordion,
@@ -8,13 +9,10 @@ import {
 } from 'react-accessible-accordion';
 import '../styles/App.css';
 
+// eslint-disable-next-line import/extensions
 import ReviewList from './ReviewList.jsx';
 
 class App extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-
   // componentDidMount() {
   //   // window.addEventListener('message', this.initPort);
   // }
@@ -29,28 +27,22 @@ class App extends React.Component {
 
   render() {
     return (
-      <Accordion allowZeroExpanded={true} style={{width:"85%"}}>
-          <AccordionItem className="reviewAccordion">
-              <AccordionItemHeading>
-                  <AccordionItemButton>
-                    <div className='reviews'>
-                      Reviews
-                    </div>
-                    <img className="arrow" src="https://static.thenounproject.com/png/196766-200.png"></img>
-                  </AccordionItemButton>
-              </AccordionItemHeading>
-              <AccordionItemPanel>
-                  <ReviewList />
-              </AccordionItemPanel>
-          </AccordionItem>
+      <Accordion allowZeroExpanded style={{ width: '85%' }}>
+        <AccordionItem className="reviewAccordion">
+          <AccordionItemHeading>
+            <AccordionItemButton>
+              <div className="reviews">
+                Reviews
+              </div>
+              <img alt="" className="arrow" src="https://static.thenounproject.com/png/196766-200.png" />
+            </AccordionItemButton>
+          </AccordionItemHeading>
+          <AccordionItemPanel>
+            <ReviewList />
+          </AccordionItemPanel>
+        </AccordionItem>
       </Accordion>
-  );
-  //   return (
-
-  //   <div className="App">
-  //     <div>Hello Worl1d</div>
-  //   </div>
-  //   )
+    );
   }
 }
 export default App;

@@ -1,21 +1,28 @@
+/* eslint-disable react/no-array-index-key */
+/* eslint-disable react/button-has-type */
+/* eslint-disable class-methods-use-this */
+/* eslint-disable guard-for-in */
+/* eslint-disable no-plusplus */
+/* eslint-disable no-console */
+/* eslint-disable import/extensions */
 import React from 'react';
 import '../styles/ReviewList.css';
 import StarRatings from 'react-star-ratings';
+import axios from 'axios';
+import $ from 'jquery';
 import RatingCountByStar from './RatingCountByStar.jsx';
 import FilterReview from './FilterReview.jsx';
 import Review from './Review.jsx';
-import axios from 'axios';
+
 import ReviewForm from './ReviewForm.jsx';
-import $ from 'jquery';
 
 class ReviewList extends React.Component {
   constructor(props) {
-    super(props)
-
-    //state holds:
-      //the reviews that will be rendered
-      //the product ID that is currently being viewed
-      //fields used in creating a review
+    super(props);
+    // state holds:
+    // the reviews that will be rendered
+    // the product ID that is currently being viewed
+    // fields used in creating a review
 
     this.state = {
       reviews: [],
@@ -31,12 +38,10 @@ class ReviewList extends React.Component {
       reviewImages: [],
       reviewAvg: 0,
       reviewCounts: {},
-      reviewEmail: ''
+      reviewEmail: '',
     };
 
-
     this.getReviewsByProductID = this.getReviewsByProductID.bind(this);
-    // this.getAllReviews = this.getAllReviews.bind(this);
     this.addReviewPart = this.addReviewPart.bind(this);
     this.addReviewQuality = this.addReviewQuality.bind(this);
     this.addReviewValue = this.addReviewValue.bind(this);
@@ -45,208 +50,204 @@ class ReviewList extends React.Component {
     this.writeReview = this.writeReview.bind(this);
     this.changeProduct = this.changeProduct.bind(this);
     this.toggleReview = this.toggleReview.bind(this);
-    // this.onMessage = this.onMessage.bind(this);
   }
 
   componentDidMount() {
     // this.getAllReviews();
-    this.getReviewsByProductID(this.state.productID);
+    const { productID } = this.state;
+    this.getReviewsByProductID(productID);
     $('body').on('change', '#Walker', (event) => {
-      console.log("IN REVIEW LIST: ", event);
-    })
+      console.log('IN REVIEW LIST: ', event);
+    });
     // window.addEventListener('message', this.initPort);
   }
 
-  // initPort(event) {
-  //   var port2 = event.ports[0];
-  //   port2.onMessage = this.onMessage;
-  // }
+  // gets reviews by the product ID that is currently in state
+  // also, in the second 'then statement, caculates the average rating of reviews by product,
+  // and the amount of reviews per star category
+  // (e.g. # of 5 star reviews, # of 4 star reviews, etc)
 
-  // onMessage(event) {
-  //   console.log("EVENT IN REVIEW LIST: ", event);
-  // }
-
-
-  //gets reviews by the product ID that is currently in state
-  //also, in the second 'then statement, caculates the average rating of reviews by product, and the amount of reviews per star category (e.g. # of 5 star reviews, # of 4 star reviews, etc)
-
-  getReviewsByProductID(state){
-    console.log(11111111111)
+  getReviewsByProductID(state) {
     axios.get('/reviews', {
       params: {
-        productID: state
-      }
+        productID: state,
+      },
     })
-    .then(reviews => {
-      this.setState({
-        reviews: reviews.data
-      });
-      return reviews;
-    })
-    .then(() => {
-      var sum = 0
-      var counts = {
-        5: 0,
-        4: 0,
-        3: 0,
-        2: 0,
-        1: 0
-      }
-      this.state.reviews.forEach(review => {
-        sum += review.reviewRating
-        counts[review.reviewRating]++
-      });
-
-      for (var key in counts) {
-        counts[key] = (counts[key] / this.state.reviews.length) * 100;
-      }
-
-      if (sum !== 0) {
+      .then((reviews) => {
         this.setState({
-          reviewAvg: sum / this.state.reviews.length,
-          reviewCounts: counts
-        })
-      } else {
-        this.setState({
-          reviewAvg: 0,
-          reviewCounts: counts
+          reviews: reviews.data,
         });
-      }
-      // console.log(this.state)
-    })
-    .catch(error => {
-      console.log('Error retrieving reviews: ', error);
-    })
+        return reviews;
+      })
+      .then(() => {
+        let sum = 0;
+        const counts = {
+          5: 0,
+          4: 0,
+          3: 0,
+          2: 0,
+          1: 0,
+        };
+        const { reviews } = this.state;
+        reviews.forEach((review) => {
+          sum += review.reviewRating;
+          counts[review.reviewRating]++;
+        });
+
+        // eslint-disable-next-line no-restricted-syntax
+        for (const key in counts) {
+          counts[key] = (counts[key] / reviews.length) * 100;
+        }
+
+        if (sum !== 0) {
+          this.setState({
+            reviewAvg: sum / reviews.length,
+            reviewCounts: counts,
+          });
+        } else {
+          this.setState({
+            reviewAvg: 0,
+            reviewCounts: counts,
+          });
+        }
+        // console.log(this.state)
+      })
+      .catch((error) => {
+        console.log('Error retrieving reviews: ', error);
+      });
   }
 
-  //not currently using this fn - was just using it in the beginning to render some data to the page to work on styling
-
-  // getAllReviews() {
-  //   axios.get('/reviews')
-  //   .then(reviews => {
-  //     this.setState({
-  //       reviews: reviews.data
-  //     });
-  //     // console.log(this.state);
-  //   })
-  //   .catch(error => {
-  //     console.log('Error retrieving reviews: ', error);
-  //     console.log(error)
-  //   })
-  // }
-
-
-  //uses the data entered on the 'ReviewForm' component that is rendered to state, and sends a post request to write a new review into the DB
+  // uses the data entered on the 'ReviewForm' component that is rendered to state,
+  // and sends a post request to write a new review into the DB
   writeReview(event) {
     event.preventDefault();
     this.toggleReview(event);
-    axios.post('http://localhost:4000/reviews' , {
-      productID: this.state.productID,
-      reviewHeading: this.state.reviewHeading,
-      reviewText: this.state.reviewText,
-      reviewRating: this.state.reviewRating,
-      reviewUsername: this.state.reviewUsername,
-      reviewRecommended: this.state.reviewRecommended,
-      reivewQuality: this.state.reviewQuality,
-      reviewValue: this.state.reviewValue,
-      reviewEaseOfUse: this.state.reviewEaseOfUse,
-      reviewImages: this.state.reviewImages,
+    const {
+      productID, reviewHeading, reviewText, reviewRating, reviewUsername,
+      reviewRecommended, reviewQuality, reviewValue, reviewEaseOfUse, reviewImages,
+    } = this.state;
+    axios.post('/reviews', {
+      productID,
+      reviewHeading,
+      reviewText,
+      reviewRating,
+      reviewUsername,
+      reviewRecommended,
+      reviewQuality,
+      reviewValue,
+      reviewEaseOfUse,
+      reviewImages,
       reviewHelpful: 0,
-      reviewUnhelpful: 0
+      reviewUnhelpful: 0,
     })
-    .then(confirmation => {
-      console.log('Review successfully posted: ', confirmation);
-    })
-    .then(() => {
-      this.getReviewsByProductID(this.state.productID);
-    })
-    .then( () => {
-      this.setState({
-      reviewHeading: '',
-      reviewText: '',
-      reviewRating: 0,
-      reviewUsername: '',
-      reviewRecommended: false,
-      reviewQuality: 0,
-      reviewValue: 0,
-      reviewEaseOfUse: 0,
-      reviewImages: [],
-      reviewEmail: ''
+      .then((confirmation) => {
+        console.log('Review successfully posted: ', confirmation);
       })
-    })
-    .catch(error => {
-      console.log('Error posting review: ', error);
-    })
-  }
-
-  //this is used to add certain review characteristics into state - passed down as a prop & called in the 'ReviewForm' component
-  addReviewPart(event) {
-    let reviewPart = event.target.className
-      this.setState({
-        [reviewPart]: event.target.value
+      .then(() => {
+        this.getReviewsByProductID(productID);
+      })
+      .then(() => {
+        this.setState({
+          reviewHeading: '',
+          reviewText: '',
+          reviewRating: 0,
+          reviewUsername: '',
+          reviewRecommended: false,
+          reviewQuality: 0,
+          reviewValue: 0,
+          reviewEaseOfUse: 0,
+          reviewImages: [],
+          reviewEmail: '',
+        });
+      })
+      .catch((error) => {
+        console.log('Error posting review: ', error);
       });
   }
- //this is used to add certain review characteristics into state - passed down as a prop & called in the 'ReviewForm' component
-  //I want to refactor these next 3 functions and combine them, but need to spend some time figuring out how to do so. The problem is that the rating component I'm using only sends back a number (the rating in this case) --need to figure out how to determine which component that number came from in order to combine
+
+  // this is used to add certain review characteristics into state,
+  // they are passed down as a prop & called in the 'ReviewForm' component
+  addReviewPart(event) {
+    const reviewPart = event.target.className;
+    this.setState({
+      [reviewPart]: event.target.value,
+    });
+  }
+  // this is used to add certain review characteristics into state
+  // they are passed down as a prop & called in the 'ReviewForm' component
+  // I want to refactor these next 3 functions and combine them
+  // problem is that the rating component I'm using only sends back a number (rating in this case)
+  // need to figure out how to determine which component that number came from in order to combine
 
   addReviewQuality(rating) {
     this.setState({
-      reviewQuality: rating
-    })
+      reviewQuality: rating,
+    });
   }
- //this is used to add certain review characteristics into state - passed down as a prop & called in the 'ReviewForm' component
+
+  // this is used to add certain review characteristics into state
+  // passed down as a prop & called in the 'ReviewForm' component
   addReviewValue(rating) {
     this.setState({
-      reviewValue: rating
-    })
+      reviewValue: rating,
+    });
   }
- //this is used to add certain review characteristics into state - passed down as a prop & called in the 'ReviewForm' component
+
+  // this is used to add certain review characteristics into state
+  // passed down as a prop & called in the 'ReviewForm' component
   addReviewEaseOfUse(rating) {
     this.setState({
-      reviewEaseOfUse: rating
-    })
+      reviewEaseOfUse: rating,
+    });
   }
+
   addReviewRating(rating) {
     this.setState({
-      reviewRating: rating
-    })
+      reviewRating: rating,
+    });
   }
 
-  //may or may not need this once we combine - this was used in order for me to test out switching up the productID in state to make sure the reviews were changing based on productID
+  // may or may not need this once we combine
+  // this was used in order for me to test out switching up the productID in state
   changeProduct(event) {
-    let newProductID = event.target.value;
+    const newProductID = event.target.value;
     this.setState({
-      productID: newProductID
+      productID: newProductID,
     }, () => {
+      // eslint-disable-next-line react/destructuring-assignment
       this.getReviewsByProductID(this.state.productID);
       // this.getAverageRating();
-    })
+    });
   }
 
-  //used to hide the div with the 'ReviewForm component'
+  // used to hide the div with the 'ReviewForm component'
   toggleReview(event) {
     event.preventDefault();
-    let reviewDiv = document.getElementById('writeReviewForm')
-    if (reviewDiv.className === 'rw-hidden' || !reviewDiv.className ) {
-      reviewDiv.className = 'rw-visible'
+    const reviewDiv = document.getElementById('writeReviewForm');
+    if (reviewDiv.className === 'rw-hidden' || !reviewDiv.className) {
+      reviewDiv.className = 'rw-visible';
     } else {
-      reviewDiv.className = 'rw-hidden'
+      reviewDiv.className = 'rw-hidden';
     }
   }
-  render() {
 
+  render() {
+    const {
+      reviewAvg, reviewCounts, reviews, reviewRating, reviewHeading, reviewText,
+      reviewQuality, reviewValue, reviewEaseOfUse, reviewUsername, reviewEmail,
+    } = this.state;
     return (
       <div>
-        <input onChange={this.changeProduct} type='text'></input>
-        <div className='reviewStats'>
-          <div className = 'ratingSummary'>
+        <input onChange={this.changeProduct} type="text" />
+        <div className="reviewStats">
+          <div className="ratingSummary">
             <RatingCountByStar
-            reviewAvg = {this.state.reviewAvg}
-            reviewCounts = {this.state.reviewCounts}
-            reviews = {this.state.reviews}
+              reviewAvg={reviewAvg}
+              reviewCounts={reviewCounts}
+              reviews={reviews}
             />
           </div>
-          <div className ='rating pros'>
+          <div className="rating pros">
             <div className="ProsAndCons">
               Pros mentioned
               <button className="proButtons">Pro #1</button>
@@ -260,56 +261,53 @@ class ReviewList extends React.Component {
               <button className="proButtons">Con #1</button>
             </div>
           </div>
-          <div className = 'rating expertRating'>
+          <div className="rating expertRating">
             Expert Rating
-            <br></br>
-            <div className='avgRatingScore'>
+            <br />
+            <div className="avgRatingScore">
               4.7
             </div>
-            <div className='starRatings'>
+            <div className="starRatings">
               <StarRatings
                 rating={4}
                 starRatedColor="yellow"
                 numberOfStars={5}
-                name='rating'
+                name="rating"
                 starDimension="20px"
                 starSpacing="3px"
-                />
-              <br></br>
+              />
+              <br />
               (50 ratings)
             </div>
           </div>
         </div>
-        <div style={{borderBottom: '1px solid rgb(197, 203, 213)'}}>
+        <div style={{ borderBottom: '1px solid rgb(197, 203, 213)' }}>
           <FilterReview />
         </div>
-        {this.state.reviews.map( (review, idx) =>
-        <Review review={review}  key={idx} />
-        )}
-        <div style={{textAlign: 'center'}}>
-          <button className='showReviewButtons show' >Show More</button>
-          <button className ='showReviewButtons' onClick={this.toggleReview}>Write a Review</button>
+        {reviews.map((review, idx) => <Review review={review} key={idx} />)}
+        <div style={{ textAlign: 'center' }}>
+          <button className="showReviewButtons show">Show More</button>
+          <button className="showReviewButtons" onClick={this.toggleReview}>Write a Review</button>
         </div>
         <ReviewForm
           // review={this.state.addReview}
           addReviewPart={this.addReviewPart}
-          reviewQuality = {this.addReviewQuality}
-          reviewValue = {this.addReviewValue}
-          reviewEaseOfUse = {this.addReviewEaseOfUse}
-          reviewRating = {this.addReviewRating}
-          writeReview = {this.writeReview}
-          overallRating = {this.state.reviewRating}
-          reviewHeading = {this.state.reviewHeading}
-          reviewText = {this.state.reviewText}
-          reviewQualityDefault = {this.state.reviewQuality}
-          reviewValueDefault = {this.state.reviewValue}
-          reviewEaseOfUseDefault = {this.state.reviewEaseOfUse}
-          reviewUsername = {this.state.reviewUsername}
-          reviewEmail = {this.state.reviewEmail}
+          reviewQuality={this.addReviewQuality}
+          reviewValue={this.addReviewValue}
+          reviewEaseOfUse={this.addReviewEaseOfUse}
+          reviewRating={this.addReviewRating}
+          writeReview={this.writeReview}
+          overallRating={reviewRating}
+          reviewHeading={reviewHeading}
+          reviewText={reviewText}
+          reviewQualityDefault={reviewQuality}
+          reviewValueDefault={reviewValue}
+          reviewEaseOfUseDefault={reviewEaseOfUse}
+          reviewUsername={reviewUsername}
+          reviewEmail={reviewEmail}
         />
-    </div>
-    )
+      </div>
+    );
   }
 }
-
-  export default ReviewList
+export default ReviewList;

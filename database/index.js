@@ -1,15 +1,16 @@
+/* eslint-disable no-console */
 const mongoose = require('mongoose');
 // mongoose.connect('mongodb://ec2-18-218-79-61.us-east-2.compute.amazonaws.com/bestbuy');
 mongoose.connect('mongodb://localhost/bestbuy');
-const mock = require('../reviewData.js');
+// const mock = require('../reviewData.js');
 
 const db = mongoose.connection;
 
 db.on('error', console.error.bind('console', 'connection error:'));
 db.once('open', () => {
-console.log('Database is running');
+  console.log('Database is running');
 
-  let productSchema = mongoose.Schema({
+  const productSchema = mongoose.Schema({
     uniqueID: Number,
     name: String,
     description: String,
@@ -24,19 +25,17 @@ console.log('Database is running');
     reviews: [],
     questions: {
       question: String,
-      answer: String
+      answer: String,
     },
     images: [],
     peopleAlsoBought: [],
     peopleAlsoViewed: [],
-    recentlyViewed: Boolean
-})
+    recentlyViewed: Boolean,
+  });
 
-  let Product = mongoose.model('Product', productSchema);
+  const Product = mongoose.model('Product', productSchema);
 
-
-
-  let reviewSchema = mongoose.Schema({
+  const reviewSchema = mongoose.Schema({
     productID: Number,
     reviewHeading: String,
     reviewText: String,
@@ -49,13 +48,13 @@ console.log('Database is running');
     reviewValue: Number,
     reviewEaseOfUse: Number,
     reviewImages: Array,
-    reviewCreatedAt: Date
-  })
+    reviewCreatedAt: Date,
+  });
 
-  let Review = mongoose.model('Review', reviewSchema);
+  const Review = mongoose.model('Review', reviewSchema);
 
-  let saveReviewToDB = (review) => {
-    var product = new Review({
+  const saveReviewToDB = (review) => {
+    const product = new Review({
       productID: review.productID,
       reviewHeading: review.reviewHeading,
       reviewText: review.reviewText,
@@ -70,9 +69,8 @@ console.log('Database is running');
       reviewImages: review.reviewImages,
       // reviewCreatedAt: review.createdAt
     });
-   return product.save();
-    console.log('CREATED: ', review.productID)
-  }
+    return product.save();
+  };
 
   // let saveToDB = (model) => {
   //   var product = new Product({
@@ -101,13 +99,9 @@ console.log('Database is running');
   //   console.log('CREATED: ', model.uniqueID)
   // }
 
-  let getAllReviews = () =>{
-    return Review.find()
-  }
+  const getAllReviews = () => Review.find();
 
-  let getReviewsByProductID = (query) =>{
-    return Review.find(query)
-  }
+  const getReviewsByProductID = (query) => Review.find(query);
 
   // let writeReview = (review => {
   //   let newReview = new Review({
@@ -134,4 +128,4 @@ console.log('Database is running');
   module.exports.getAllReviews = getAllReviews;
   module.exports.saveReviewToDB = saveReviewToDB;
   module.exports.getReviewsByProductID = getReviewsByProductID;
-})
+});
