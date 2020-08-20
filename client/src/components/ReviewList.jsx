@@ -68,7 +68,7 @@ class ReviewList extends React.Component {
   // (e.g. # of 5 star reviews, # of 4 star reviews, etc)
 
   getReviewsByProductID(state) {
-    axios.get('http://ec2-18-218-79-61.us-east-2.compute.amazonaws.com:4000/reviews', {
+    axios.get('/reviews', {
       params: {
         productID: state,
       },
@@ -126,7 +126,7 @@ class ReviewList extends React.Component {
       productID, reviewHeading, reviewText, reviewRating, reviewUsername,
       reviewRecommended, reviewQuality, reviewValue, reviewEaseOfUse, reviewImages,
     } = this.state;
-    axios.post('http://ec2-18-218-79-61.us-east-2.compute.amazonaws.com:4000/reviews', {
+    axios.post('/reviews', {
       productID,
       reviewHeading,
       reviewText,
