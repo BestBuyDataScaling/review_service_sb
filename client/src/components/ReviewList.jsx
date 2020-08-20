@@ -72,7 +72,7 @@ class ReviewList extends React.Component {
 
   getReviewsByProductID(state){
     console.log(11111111111)
-    axios.get('http://localhost:4000/reviews', {
+    axios.get('/reviews', {
       params: {
         productID: state
       }

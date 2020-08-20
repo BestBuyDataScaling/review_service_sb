@@ -15,7 +15,7 @@ class App extends React.Component {
   }
 
   // componentDidMount() {
-  //   window.addEventListener('message', this.initPort);
+  //   // window.addEventListener('message', this.initPort);
   // }
 
   // initPort(event) {
@@ -44,12 +44,12 @@ class App extends React.Component {
           </AccordionItem>
       </Accordion>
   );
-    // return (
+  //   return (
 
-    // <div className="App">
-    //   <div>Hello Worl1d</div>
-    // </div>
-    // )
+  //   <div className="App">
+  //     <div>Hello Worl1d</div>
+  //   </div>
+  //   )
   }
 }
 export default App;

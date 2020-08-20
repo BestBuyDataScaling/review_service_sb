@@ -4,9 +4,10 @@ import ReactDOM from 'react-dom';
 import App from './components/App.jsx';
 
 ReactDOM.render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <App />
-  </React.StrictMode>,
+  // </React.StrictMode>
+  ,
   document.getElementById('Walker')
 );
 
