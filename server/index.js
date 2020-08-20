@@ -18,9 +18,9 @@ app.use(express.json());
 //   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 // });
 
-app.get('ec2-18-218-79-61.us-east-2.compute.amazonaws.com/reviews', (req, res) => {
+app.get('/reviews', (req, res) => {
   req.query.productID = Number.parseInt(req.query.productID);
-  console.log('1111111111111111')
+  console.log('1111111111111111');
   console.log('REQUEST IN SERVER: ', req.query);
   // db.getAllReviews()
   db.getReviewsByProductID(req.query)
@@ -45,7 +45,7 @@ app.get('ec2-18-218-79-61.us-east-2.compute.amazonaws.com/reviews', (req, res) =
 //   .catch(error => console.log("ERROR IN REVIEW SERVER: ", error))
 // })
 
-app.post('ec2-18-218-79-61.us-east-2.compute.amazonaws.com/reviews', (req, res) => {
+app.post('/reviews', (req, res) => {
   // console.log(req.body)
   db.saveReviewToDB(req.body)
     .then((confirmation) => {
