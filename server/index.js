@@ -20,6 +20,7 @@ app.use(express.json());
 
 app.get('ec2-18-218-79-61.us-east-2.compute.amazonaws.com/reviews', (req, res) => {
   req.query.productID = Number.parseInt(req.query.productID);
+  console.log('1111111111111111')
   console.log('REQUEST IN SERVER: ', req.query);
   // db.getAllReviews()
   db.getReviewsByProductID(req.query)
