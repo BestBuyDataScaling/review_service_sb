@@ -1,0 +1,66 @@
+.emptyRating {
+  height: 16px;
+  width: 33px;
+  border: 1px solid black;
+}
+
+.reviewSubmit {
+  color: #fff!important;
+  background-color: #0046be;
+  width: 71%;
+  height: 40px;
+  margin: 15px 0;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 15px;
+  border: 0
+}
+
+.reviewForm{
+  width: 50%;
+  display: inline-block;
+
+}
+
+.bufferReview {
+  width: 30%;
+  height: 100%;
+  display: inline-block;
+}
+
+.emptyRating {
+ width: 33px;
+ height: 16px;
+ border: 1px solid #c5cbd5;
+ margin: 0 1px;
+}
+
+.fullRating {
+  width: 33px;
+  height: 16px;
+  border: 1px solid #c5cbd5;
+  background-color: #55555a;
+}
+
+.reviewText {
+  height: 70px;
+  width: 70%;
+}
+.reviewHeading {
+  width: 70%;
+  height: 25px;
+}
+
+.reviewUsername,
+.reviewEmail {
+  width: 70%;
+  height:25px;
+}
+
+.rw-hidden {
+  display:none;
+}
+
+.rw-visible {
+  display: block;
+}

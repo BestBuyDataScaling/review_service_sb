@@ -1,13 +1,13 @@
 import React from 'react';
 import Rating from 'react-rating';
-// import '../styles/ReviewForm.css'
+import '../styles/ReviewForm.css'
 import StarRatings from 'react-star-ratings';
 
 
 const ReviewForm = ({ review, addReviewPart, reviewQuality, reviewValue, reviewEaseOfUse, reviewRating, writeReview, reviewHeading, reviewText, reviewQualityDefault, reviewValueDefault, reviewEaseOfUseDefault, reviewUsername, reviewEmail }) => {
 
   return (
-    <div id = 'writeReviewForm' class = 'rw-hidden' >
+    <div id = 'writeReviewForm' className = 'rw-hidden' >
       <div className = 'bufferReview' >
       </div>
       <div  className = 'reviewForm' >

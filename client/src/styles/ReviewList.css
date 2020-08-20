@@ -1,0 +1,85 @@
+.reviewStats {
+  height: 100px;
+  width: 100%;
+  font-size: 10px;
+  margin: 2px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid rgb(197, 203, 213);
+}
+
+.rating {
+  display:inline-block;
+  padding: 5px;
+  width: 23%;
+}
+
+.ratingSummary{
+  width: 50%;
+  display: inline-block;
+}
+
+.averageRatings {
+  width:40%;
+  display:inline-block;
+}
+
+.countByStars {
+  width: 50%;
+  display: inline-block;
+}
+
+.starRatings {
+  width:80%;
+  display: inline-block;
+}
+
+.avgRatingScore{
+  font-size: 20px;
+}
+.widget-svg{
+  height: 15px;
+  width: 15px;
+}
+
+.percentBar {
+  width: 70%;
+}
+
+.ProsAndCons {
+  display: inline-block;
+  padding: 5px;
+}
+
+.proButtons{
+  display: block;
+  margin: 5px;
+}
+
+.showReviewButtons {
+ font-size: 15px;
+ font:arial;
+ height: 35px;
+ width: 250px;
+ cursor: pointer;
+ text-align: center;
+ vertical-align: middle;
+ margin: 20px;
+ padding: 0 28px;
+ color: #fff;
+ background-color: #0046be;
+ font-weight: bold;
+ border-radius: 4px;
+ border: 0;
+}
+
+.show {
+  background-color: #fff;
+  color: #0046be;
+  border: 1px solid #0046be;
+}
+
+.show:hover {
+  color: #fff;
+  background-color: #0046be;
+}
+

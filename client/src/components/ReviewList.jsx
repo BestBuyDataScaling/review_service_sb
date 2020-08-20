@@ -1,5 +1,5 @@
 import React from 'react';
-// import '../styles/ReviewList.css';
+import '../styles/ReviewList.css';
 import StarRatings from 'react-star-ratings';
 import RatingCountByStar from './RatingCountByStar.jsx';
 import FilterReview from './FilterReview.jsx';

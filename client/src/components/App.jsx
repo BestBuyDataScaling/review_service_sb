@@ -6,7 +6,8 @@ import {
   AccordionItemButton,
   AccordionItemPanel,
 } from 'react-accessible-accordion';
-// import './styles/App.css';
+import '../styles/App.css';
+
 import ReviewList from './ReviewList.jsx';
 
 class App extends React.Component {

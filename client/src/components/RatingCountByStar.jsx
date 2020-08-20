@@ -1,6 +1,6 @@
 import React from 'react';
 import {Line} from 'rc-progress';
-// import '../styles/ReviewList.css'
+import '../styles/ReviewList.css'
 import StarRatings from 'react-star-ratings';
 
 const RatingCountByStar = ({ reviewAvg, reviewCounts, reviews }) => {
