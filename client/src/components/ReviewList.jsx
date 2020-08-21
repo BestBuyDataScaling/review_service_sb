@@ -1,3 +1,4 @@
+/* eslint-disable radix */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/button-has-type */
 /* eslint-disable class-methods-use-this */
@@ -9,7 +10,6 @@ import React from 'react';
 import '../styles/ReviewList.css';
 import StarRatings from 'react-star-ratings';
 import axios from 'axios';
-import $ from 'jquery';
 import RatingCountByStar from './RatingCountByStar.jsx';
 import FilterReview from './FilterReview.jsx';
 import Review from './Review.jsx';
@@ -19,10 +19,6 @@ import ReviewForm from './ReviewForm.jsx';
 class ReviewList extends React.Component {
   constructor(props) {
     super(props);
-    // state holds:
-    // the reviews that will be rendered
-    // the product ID that is currently being viewed
-    // fields used in creating a review
 
     this.state = {
       reviews: [],
@@ -61,7 +57,7 @@ class ReviewList extends React.Component {
     //   console.log('IN REVIEW LIST: ', event);
     // });
     // window.addEventListener('message', this.initPort);
-    this.watchDiv('Walker');
+    this.watchDiv('searchbar_app');
   }
 
   // gets reviews by the product ID that is currently in state
@@ -120,6 +116,7 @@ class ReviewList extends React.Component {
   }
 
   watchDiv(div) {
+    const { productID } = this.state;
     // Select the node that will be observed for mutations
     const targetNode = document.getElementById(`${div}`);
 
@@ -127,13 +124,14 @@ class ReviewList extends React.Component {
     const config = { attributes: true, childList: false, subtree: false };
 
     // Callback function to execute when mutations are observed
-    let callback = function(mutationsList, observer) {
+    // eslint-disable-next-line no-unused-vars
+    let callback = (mutationsList, observer) => {
       console.log(mutationsList[0].target.className);
       if (mutationsList[0].attributeName === 'class') {
         this.setState({
-          productID: Number.parseInt(mutationsList[0].target.className)
+          productID: Number.parseInt(mutationsList[0].target.className),
         });
-        this.getReviewsByProductID(this.state.productID);
+        this.getReviewsByProductID(productID);
       }
     };
     callback = callback.bind(this);
@@ -202,9 +200,6 @@ class ReviewList extends React.Component {
   }
   // this is used to add certain review characteristics into state
   // they are passed down as a prop & called in the 'ReviewForm' component
-  // I want to refactor these next 3 functions and combine them
-  // problem is that the rating component I'm using only sends back a number (rating in this case)
-  // need to figure out how to determine which component that number came from in order to combine
 
   addReviewQuality(rating) {
     this.setState({
