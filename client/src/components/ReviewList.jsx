@@ -110,6 +110,10 @@ class ReviewList extends React.Component {
         }
         // console.log(this.state)
       })
+      .then(() => {
+        const { reviewAvg } = this.state;
+        document.getElementById('Champagne').className = reviewAvg;
+      })
       .catch((error) => {
         console.log('Error retrieving reviews: ', error);
       });
