@@ -116,7 +116,6 @@ class ReviewList extends React.Component {
   }
 
   watchDiv(div) {
-    const { productID } = this.state;
     // Select the node that will be observed for mutations
     const targetNode = document.getElementById(`${div}`);
 
@@ -131,7 +130,7 @@ class ReviewList extends React.Component {
         this.setState({
           productID: Number.parseInt(mutationsList[0].target.className),
         });
-        this.getReviewsByProductID(productID);
+        this.getReviewsByProductID(Number.parseInt(mutationsList[0].target.className));
       }
     };
     callback = callback.bind(this);
