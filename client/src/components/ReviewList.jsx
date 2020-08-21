@@ -50,16 +50,18 @@ class ReviewList extends React.Component {
     this.writeReview = this.writeReview.bind(this);
     this.changeProduct = this.changeProduct.bind(this);
     this.toggleReview = this.toggleReview.bind(this);
+    this.watchDiv = this.watchDiv.bind(this);
   }
 
   componentDidMount() {
     // this.getAllReviews();
     const { productID } = this.state;
     this.getReviewsByProductID(productID);
-    $('body').on('change', '#Walker', (event) => {
-      console.log('IN REVIEW LIST: ', event);
-    });
+    // $('body').on('change', '#Walker', (event) => {
+    //   console.log('IN REVIEW LIST: ', event);
+    // });
     // window.addEventListener('message', this.initPort);
+    this.watchDiv('Walker');
   }
 
   // gets reviews by the product ID that is currently in state
@@ -115,6 +117,31 @@ class ReviewList extends React.Component {
       .catch((error) => {
         console.log('Error retrieving reviews: ', error);
       });
+  }
+
+  watchDiv(div) {
+    // Select the node that will be observed for mutations
+    const targetNode = document.getElementById(`${div}`);
+
+    // Options for the observer (which mutations to observe)
+    const config = { attributes: true, childList: false, subtree: false };
+
+    // Callback function to execute when mutations are observed
+    let callback = function(mutationsList, observer) {
+      console.log(mutationsList[0].target.className);
+      if (mutationsList[0].attributeName === 'class') {
+        this.setState({
+          productID: Number.parseInt(mutationsList[0].target.className)
+        });
+        this.getReviewsByProductID(this.state.productID);
+      }
+    };
+    callback = callback.bind(this);
+    // Create an observer instance linked to the callback function
+    const observer = new MutationObserver(callback);
+
+    // Start observing the target node for configured mutations
+    observer.observe(targetNode, config);
   }
 
   // uses the data entered on the 'ReviewForm' component that is rendered to state,
@@ -209,16 +236,16 @@ class ReviewList extends React.Component {
 
   // may or may not need this once we combine
   // this was used in order for me to test out switching up the productID in state
-  changeProduct(event) {
-    const newProductID = event.target.value;
-    this.setState({
-      productID: newProductID,
-    }, () => {
-      // eslint-disable-next-line react/destructuring-assignment
-      this.getReviewsByProductID(this.state.productID);
-      // this.getAverageRating();
-    });
-  }
+  // changeProduct(event) {
+  //   const newProductID = event.target.value;
+  //   this.setState({
+  //     productID: newProductID,
+  //   }, () => {
+  //     // eslint-disable-next-line react/destructuring-assignment
+  //     this.getReviewsByProductID(this.state.productID);
+  //     // this.getAverageRating();
+  //   });
+  // }
 
   // used to hide the div with the 'ReviewForm component'
   toggleReview(event) {
