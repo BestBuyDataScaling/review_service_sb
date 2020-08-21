@@ -50,7 +50,7 @@ class ReviewList extends React.Component {
     this.writeReview = this.writeReview.bind(this);
     this.changeProduct = this.changeProduct.bind(this);
     this.toggleReview = this.toggleReview.bind(this);
-    this.watchDiv = this.watchDiv.bind(this);
+    // this.watchDiv = this.watchDiv.bind(this);
   }
 
   componentDidMount() {
