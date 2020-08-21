@@ -50,7 +50,7 @@ class ReviewList extends React.Component {
     this.writeReview = this.writeReview.bind(this);
     this.changeProduct = this.changeProduct.bind(this);
     this.toggleReview = this.toggleReview.bind(this);
-    // this.watchDiv = this.watchDiv.bind(this);
+    this.watchDiv = this.watchDiv.bind(this);
   }
 
   componentDidMount() {
@@ -136,7 +136,7 @@ class ReviewList extends React.Component {
         this.getReviewsByProductID(this.state.productID);
       }
     };
-    callback = callback.bind(this);
+    // callback = callback.bind(this);
     // Create an observer instance linked to the callback function
     const observer = new MutationObserver(callback);
 
