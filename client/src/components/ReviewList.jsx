@@ -44,7 +44,6 @@ class ReviewList extends React.Component {
     this.addReviewEaseOfUse = this.addReviewEaseOfUse.bind(this);
     this.addReviewRating = this.addReviewRating.bind(this);
     this.writeReview = this.writeReview.bind(this);
-    // this.changeProduct = this.changeProduct.bind(this);
     this.toggleReview = this.toggleReview.bind(this);
     this.watchDiv = this.watchDiv.bind(this);
     this.addHelpfulRating = this.addHelpfulRating.bind(this);
@@ -234,19 +233,6 @@ class ReviewList extends React.Component {
     });
   }
 
-  // may or may not need this once we combine
-  // this was used in order for me to test out switching up the productID in state
-  // changeProduct(event) {
-  //   const newProductID = event.target.value;
-  //   this.setState({
-  //     productID: newProductID,
-  //   }, () => {
-  //     // eslint-disable-next-line react/destructuring-assignment
-  //     this.getReviewsByProductID(this.state.productID);
-  //     // this.getAverageRating();
-  //   });
-  // }
-
   addHelpfulRating(productID, reviewID) {
     axios.post('http://ec2-18-218-79-61.us-east-2.compute.amazonaws.com/helpful', {
       productID,
@@ -281,7 +267,6 @@ class ReviewList extends React.Component {
     } = this.state;
     return (
       <div>
-        <input onChange={this.changeProduct} type="text" />
         <div className="reviewStats">
           <div className="ratingSummary">
             <RatingCountByStar
