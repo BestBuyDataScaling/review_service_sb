@@ -55,6 +55,7 @@
 .reviewEmail {
   width: 70%;
   height:25px;
+  margin-bottom:10px;
 }
 
 .rw-hidden {
@@ -67,6 +68,8 @@
 
 h3 {
   font-size: 25px;
+  padding-bottom: 10px;
+  padding-top: 30px
 }
 
 h5 {
@@ -84,4 +87,10 @@ em {
 
 label {
   font-weight: normal;
+  font-size: 20px;
+}
+
+p {
+  font-size:15px;
+  padding: 5px 10px;
 }
