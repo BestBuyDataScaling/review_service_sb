@@ -11,6 +11,7 @@
   width: 66.66%;
   display: inline-block;
   font-weight: normal;
+  font-size: 20px
 }
 
 .username {
@@ -29,6 +30,7 @@
 .reviewBody .header {
   padding-top: 30px;
   margin-left: 10px;
+
 }
 
 .reviewButtons {
