@@ -33,11 +33,11 @@ const Review = ({ review, addHelpfulRating, addUnhelpfulRating }) => {
         <StarRatings
           className="reviewRating"
           rating={review.reviewRating}
-          starRatedColor="yellow"
+          starRatedColor="rgb(255, 204, 0)"
           // changeRating={this.changeRating}
           numberOfStars={5}
           name="rating"
-          starDimension="20px"
+          starDimension="25px"
           starSpacing="3px"
         />
         <div className="reviewBody header">
