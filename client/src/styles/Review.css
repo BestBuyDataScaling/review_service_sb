@@ -10,6 +10,7 @@
 .reviewBody {
   width: 66.66%;
   display: inline-block;
+  font-weight: normal;
 }
 
 .username {
