@@ -1,21 +1,27 @@
 .reviewStats {
-  height: 100px;
+  height: auto;
   width: 100%;
-  font-size: 10px;
+  font-size: 15px;
   margin: 2px;
-  padding-bottom: 5px;
+  padding: 30px 0px;
   border-bottom: 1px solid rgb(197, 203, 213);
+  vertical-align: top;
 }
 
 .rating {
   display:inline-block;
-  padding: 5px;
   width: 23%;
+  vertical-align: top;
 }
 
 .ratingSummary{
   width: 50%;
   display: inline-block;
+}
+
+.expertRating {
+  padding-left: 40px;
+  width: auto;
 }
 
 .averageRatings {
@@ -24,22 +30,29 @@
 }
 
 .countByStars {
-  width: 50%;
+  width: 60%;
   display: inline-block;
+  vertical-align: top;
 }
 
 .starRatings {
-  width:80%;
+  width: 100%;
   display: inline-block;
+  font-weight: normal;
 }
 
 .avgRatingScore{
-  font-size: 20px;
+  font-size: 40px;
   font-weight: normal;
 }
+
 .widget-svg{
   height: 15px;
   width: 15px;
+}
+
+.ratingsByStars {
+  padding-bottom: 10px;
 }
 
 .percentBar {
@@ -48,12 +61,26 @@
 
 .ProsAndCons {
   display: inline-block;
-  padding: 5px;
+  padding: 0px 10px;
+  padding-bottom: 5px;
+  font-size:15px;
+}
+
+.cons{
+  padding-right: 70px;
+  border-right: 1px solid #c5cbd5;
 }
 
 .proButtons{
   display: block;
   margin: 5px;
+  border: 1px solid #c5cbd5;
+  color: #0046be;
+  background: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+  height: 30px;
+  width: 100px;
 }
 
 .showReviewButtons {

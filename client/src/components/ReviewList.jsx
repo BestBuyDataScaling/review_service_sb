@@ -114,7 +114,7 @@ class ReviewList extends React.Component {
       })
       .then(() => {
         const { reviewAvg } = this.state;
-        document.getElementById('Champagne').className = reviewAvg;
+        document.getElementById('Champagne').className = reviewAvg.toFixed(1);
       })
       .catch((error) => {
         console.log('Error retrieving reviews: ', error);
@@ -297,7 +297,7 @@ class ReviewList extends React.Component {
               <button className="proButtons">Pro #2</button>
               <button className="proButtons">Pro #3</button>
             </div>
-            <div className="ProsAndCons">
+            <div className="ProsAndCons cons">
               Cons mentioned
               <button className="proButtons">Con #1</button>
               <button className="proButtons">Con #1</button>
@@ -313,10 +313,10 @@ class ReviewList extends React.Component {
             <div className="starRatings">
               <StarRatings
                 rating={4}
-                starRatedColor="yellow"
+                starRatedColor="rgb(255, 204, 0)"
                 numberOfStars={5}
                 name="rating"
-                starDimension="20px"
+                starDimension="25px"
                 starSpacing="3px"
               />
               <br />

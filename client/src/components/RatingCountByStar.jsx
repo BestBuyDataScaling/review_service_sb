@@ -21,12 +21,12 @@ const RatingCountByStar = ({ reviewAvg, reviewCounts, reviews }) => {
       <div className="averageRatings">
         Customer Rating
         <div className="avgRatingScore">
-          { reviewAvg }
+          { reviewAvg.toFixed(1) }
         </div>
         <div className="starRatings">
           <StarRatings
             rating={reviewAvg}
-            starRatedColor="yellow"
+            starRatedColor="rgb(255, 204, 0)"
             numberOfStars={5}
             name="rating"
             starDimension="20px"
@@ -35,31 +35,32 @@ const RatingCountByStar = ({ reviewAvg, reviewCounts, reviews }) => {
           <br />
           {`${reviews.length} reviews` }
           <br />
-          {`${percentRecommended}% would recommend to friends` }
+          <strong>{`${percentRecommended}% `}</strong>
+          would recommend to a friend.
         </div>
       </div>
       <div className="countByStars">
-        <div>
+        <div className="ratingsByStars">
           5 Stars
           <input type="checkbox" />
           <Line className="percentBar" percent={reviewCounts[5]} strokeWidth={5} strokeColor="blue" trailWidth={5} />
         </div>
-        <div>
+        <div className="ratingsByStars">
           4 Stars
           <input type="checkbox" />
           <Line className="percentBar" percent={reviewCounts[4]} strokeWidth={5} strokeColor="blue" trailWidth={5} />
         </div>
-        <div>
+        <div className="ratingsByStars">
           3 Stars
           <input type="checkbox" />
           <Line className="percentBar" percent={reviewCounts[3]} strokeWidth={5} strokeColor="blue" trailWidth={5} />
         </div>
-        <div>
+        <div className="ratingsByStars">
           2 Stars
           <input type="checkbox" />
           <Line className="percentBar" percent={reviewCounts[2]} strokeWidth={5} strokeColor="blue" trailWidth={5} />
         </div>
-        <div>
+        <div className="ratingsByStars">
           1 Stars
           <input type="checkbox" />
           <Line className="percentBar" percent={reviewCounts[1]} strokeWidth={5} strokeColor="blue" trailWidth={5} />
