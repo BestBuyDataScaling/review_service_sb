@@ -33,6 +33,9 @@
   background-color: white;
   display:inline-block;
 }
+.reviewBody .header {
+ margin: 5px 0px;
+}
 
 .reviewButtons {
   color: #0046be;
