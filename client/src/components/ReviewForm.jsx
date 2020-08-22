@@ -16,7 +16,7 @@ const ReviewForm = ({
     <div id="writeReviewForm" className="rw-hidden">
       <div className="bufferReview" />
       <div className="reviewForm">
-        <h4> Overall rating: </h4>
+        <h3> Overall rating: </h3>
         <StarRatings
           className="reviewRating"
           onClick={reviewRating}
@@ -29,20 +29,20 @@ const ReviewForm = ({
         />
         <div>
           <br />
-          <h5> Summary </h5>
+          <h3> Summary </h3>
           <input type="text" className="reviewHeading" onChange={addReviewPart} value={reviewHeading} />
           <br />
           <em style={{ fontSize: '13px' }}> Example: Great Camera for beginners! </em>
         </div>
         <div>
-          <h5> Your review </h5>
+          <h3> Your review </h3>
           <textarea className="reviewText" onChange={addReviewPart} value={reviewText} />
           <br />
           <em style={{ fontSize: '13px' }}> Minimum required characters: 50 </em>
         </div>
         <br />
         <div>
-          <h5> Would you recommend this to a friend? </h5>
+          <h3> Would you recommend this to a friend? </h3>
           <input className="reviewRecommended" onChange={addReviewPart} type="radio" id="yes" name="recommended" value defaultChecked={false} />
           <label htmlFor="yes"> Yes </label>
           <br />
@@ -52,8 +52,8 @@ const ReviewForm = ({
         </div>
         <br />
         <div>
-          <h5> Help us break it down </h5>
-          Quality:
+          <h3> Help us break it down </h3>
+          <h5>Quality:</h5>
           {' '}
           <Rating
             onClick={reviewQuality}
@@ -62,7 +62,7 @@ const ReviewForm = ({
             initialRating={reviewQualityDefault}
           />
           <br />
-          Value:
+          <h5>Value:</h5>
           {' '}
           <Rating
             onClick={reviewValue}
@@ -71,7 +71,7 @@ const ReviewForm = ({
             initialRating={reviewValueDefault}
           />
           <br />
-          Ease of Use:
+          <h5>Ease of Use:</h5>
           {' '}
           <Rating
             onClick={reviewEaseOfUse}
@@ -83,12 +83,12 @@ const ReviewForm = ({
         </div>
         <br />
         <div>
-          <h5> Add a photo </h5>
+          <h3> Add a photo </h3>
           <input type="file" />
         </div>
         <br />
         <div>
-          <h5> Tell us a little about yourself. </h5>
+          <h3> Tell us a little about yourself. </h3>
           <p style={{ fontSize: '15px' }}><strong> Create a nickname </strong></p>
           <input className="reviewUsername" type="text" onChange={addReviewPart} value={reviewUsername} />
           <p style={{ fontSize: '15px' }}>
