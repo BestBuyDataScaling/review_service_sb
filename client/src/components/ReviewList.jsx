@@ -47,6 +47,8 @@ class ReviewList extends React.Component {
     // this.changeProduct = this.changeProduct.bind(this);
     this.toggleReview = this.toggleReview.bind(this);
     this.watchDiv = this.watchDiv.bind(this);
+    this.addHelpfulRating = this.addHelpfulRating.bind(this);
+    this.addUnhelpfulRating = this.addUnhelpfulRating.bind(this);
   }
 
   componentDidMount() {
@@ -245,6 +247,22 @@ class ReviewList extends React.Component {
   //   });
   // }
 
+  addHelpfulRating(productID, reviewID) {
+    axios.post('http://ec2-18-218-79-61.us-east-2.compute.amazonaws.com/helpful', {
+      productID,
+      _id: reviewID,
+    })
+      .then(() => this.getReviewsByProductID(productID));
+  }
+
+  addUnhelpfulRating(productID, reviewID) {
+    axios.post('http://ec2-18-218-79-61.us-east-2.compute.amazonaws.com/unhelpful', {
+      productID,
+      _id: reviewID,
+    })
+      .then(() => this.getReviewsByProductID(productID));
+  }
+
   // used to hide the div with the 'ReviewForm component'
   toggleReview(event) {
     event.preventDefault();
@@ -309,7 +327,14 @@ class ReviewList extends React.Component {
         <div style={{ borderBottom: '1px solid rgb(197, 203, 213)' }}>
           <FilterReview />
         </div>
-        {reviews.map((review, idx) => <Review review={review} key={idx} />)}
+        {reviews.map((review, idx) => (
+          <Review
+            review={review}
+            key={idx}
+            addHelpfulRating={this.addHelpfulRating}
+            addUnhelpfulRating={this.addUnhelpfulRating}
+          />
+        ))}
         <div style={{ textAlign: 'center' }}>
           <button className="showReviewButtons show">Show More</button>
           <button className="showReviewButtons" onClick={this.toggleReview}>Write a Review</button>
