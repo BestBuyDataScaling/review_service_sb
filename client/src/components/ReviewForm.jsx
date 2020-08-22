@@ -24,8 +24,8 @@ const ReviewForm = ({
           starSpacing="0px"
           isSelectable
           changeRating={(rating) => reviewRating(rating)}
-          starHoverColor="yellow"
-          starRatedColor="yellow"
+          starHoverColor="rgb(255, 204, 0)"
+          starRatedColor="rgb(255, 204, 0)"
         />
         <div>
           {/* <br /> */}
