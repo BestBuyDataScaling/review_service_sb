@@ -50,6 +50,7 @@ const ReviewForm = ({
           <label htmlFor="no"> No </label>
           <br />
         </div>
+        <br />
         <div>
           <h5> Help us break it down </h5>
           Quality:
