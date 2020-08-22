@@ -28,7 +28,7 @@ const ReviewForm = ({
           starRatedColor="yellow"
         />
         <div>
-          <br />
+          {/* <br /> */}
           <h3> Summary </h3>
           <input type="text" className="reviewHeading" onChange={addReviewPart} value={reviewHeading} />
           <br />
@@ -40,7 +40,7 @@ const ReviewForm = ({
           <br />
           <em style={{ fontSize: '13px' }}> Minimum required characters: 50 </em>
         </div>
-        <br />
+        {/* <br /> */}
         <div>
           <h3> Would you recommend this to a friend? </h3>
           <input className="reviewRecommended" onChange={addReviewPart} type="radio" id="yes" name="recommended" value defaultChecked={false} />
@@ -50,7 +50,7 @@ const ReviewForm = ({
           <label htmlFor="no"> No </label>
           <br />
         </div>
-        <br />
+        {/* <br /> */}
         <div>
           <h3> Help us break it down </h3>
           <h5>Quality:</h5>
@@ -81,17 +81,17 @@ const ReviewForm = ({
           />
           <br />
         </div>
-        <br />
+        {/* <br /> */}
         <div>
           <h3> Add a photo </h3>
           <input type="file" />
         </div>
-        <br />
+        {/* <br /> */}
         <div>
           <h3> Tell us a little about yourself. </h3>
-          <p style={{ fontSize: '15px' }}><strong> Create a nickname </strong></p>
+          <p><strong> Create a nickname </strong></p>
           <input className="reviewUsername" type="text" onChange={addReviewPart} value={reviewUsername} />
-          <p style={{ fontSize: '15px' }}>
+          <p>
             <strong> Email address </strong>
             <em> Optional </em>
           </p>

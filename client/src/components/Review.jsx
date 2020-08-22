@@ -40,7 +40,7 @@ const Review = ({ review }) => {
         <div className="reviewBody header">
           <strong>{review.reviewHeading}</strong>
         </div>
-        <div style={{ fontSize: '10px' }}>
+        <div style={{ fontSize: '15px' }}>
           <br />
           Posted 1 month ago.
         </div>
