@@ -35,7 +35,7 @@ const RatingCountByStar = ({ reviewAvg, reviewCounts, reviews }) => {
           <br />
           {`${reviews.length} reviews` }
           <br />
-          <strong>{`${percentRecommended}% `}</strong>
+          <strong>{`${Math.floor(percentRecommended)}% `}</strong>
           would recommend to a friend.
         </div>
       </div>
