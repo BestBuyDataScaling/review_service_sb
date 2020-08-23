@@ -5,6 +5,7 @@
 #Walker {
   display: flex;
   justify-content: center;
+  padding-bottom: 100px;
 }
 
 .App-logo {
