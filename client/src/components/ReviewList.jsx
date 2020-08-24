@@ -166,6 +166,7 @@ class ReviewList extends React.Component {
       reviewValue,
       reviewEaseOfUse,
       reviewImages,
+      reviewCreatedAt: new Date(),
       reviewHelpful: 0,
       reviewUnhelpful: 0,
     })

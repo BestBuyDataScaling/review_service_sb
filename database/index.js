@@ -70,7 +70,7 @@ db.once('open', () => {
       reviewValue: review.reviewValue,
       reviewEaseOfUse: review.reviewEaseOfUse,
       reviewImages: review.reviewImages,
-      reviewCreatedAt: new Date(),
+      reviewCreatedAt: review.reviewCreatedAt,
     });
     return product.save();
   };
