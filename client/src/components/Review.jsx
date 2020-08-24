@@ -48,7 +48,7 @@ const Review = ({ review, addHelpfulRating, addUnhelpfulRating }) => {
           <br />
           Posted
           {' '}
-          <ReactTimeAgo date={review.reviewCreatedAt} />
+          <ReactTimeAgo date={review.reviewCreatedAt || new Date()} />
         </div>
         <br />
         {review.reviewText}

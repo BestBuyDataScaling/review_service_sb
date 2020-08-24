@@ -47,7 +47,7 @@ app.get('/reviews', (req, res) => {
 // })
 
 app.post('/reviews', (req, res) => {
-  // console.log(req.body)
+  console.log('REQUEST IN SERVER: ', req.body);
   db.saveReviewToDB(req.body)
     .then((confirmation) => {
       res.status(200).send(confirmation);
