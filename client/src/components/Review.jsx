@@ -47,6 +47,7 @@ const Review = ({ review, addHelpfulRating, addUnhelpfulRating }) => {
         <div style={{ fontSize: '15px' }}>
           <br />
           Posted
+          {' '}
           <ReactTimeAgo date={review.reviewCreatedAt} />
         </div>
         <br />
