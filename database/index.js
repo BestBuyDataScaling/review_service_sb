@@ -13,30 +13,30 @@ db.on('error', console.error.bind('console', 'connection error:'));
 db.once('open', () => {
   console.log('Database is running');
 
-  const productSchema = mongoose.Schema({
-    uniqueID: Number,
-    name: String,
-    description: String,
-    brand: String,
-    department: String,
-    color: String,
-    subDept: String,
-    sku: Number,
-    price: Number,
-    avgRating: Number,
-    colors: [],
-    reviews: [],
-    questions: {
-      question: String,
-      answer: String,
-    },
-    images: [],
-    peopleAlsoBought: [],
-    peopleAlsoViewed: [],
-    recentlyViewed: Boolean,
-  });
+  // const productSchema = mongoose.Schema({
+  //   uniqueID: Number,
+  //   name: String,
+  //   description: String,
+  //   brand: String,
+  //   department: String,
+  //   color: String,
+  //   subDept: String,
+  //   sku: Number,
+  //   price: Number,
+  //   avgRating: Number,
+  //   colors: [],
+  //   reviews: [],
+  //   questions: {
+  //     question: String,
+  //     answer: String,
+  //   },
+  //   images: [],
+  //   peopleAlsoBought: [],
+  //   peopleAlsoViewed: [],
+  //   recentlyViewed: Boolean,
+  // });
 
-  const Product = mongoose.model('Product', productSchema);
+  // const Product = mongoose.model('Product', productSchema);
 
   const reviewSchema = mongoose.Schema({
     productID: Number,
@@ -75,13 +75,21 @@ db.once('open', () => {
     return product.save();
   };
 
-  const addHelpfulRating = (productID, id) => {
-    return Review.updateOne({ productID: productID, _id: id }, { $inc: { reviewHelpful: 1 } });
+  const addHelpfulRating = (id) => {
+    return Review.updateOne({  _id: id }, { $inc: { reviewHelpful: 1 } });
   };
 
-  const addUnhelpfulRating = (productID, id) => {
-    return Review.updateOne({ productID: productID, _id: id }, { $inc: { reviewUnhelpful: 1 } });
+  const addUnhelpfulRating = (id) => {
+    return Review.updateOne({ _id: id }, { $inc: { reviewUnhelpful: 1 } });
   };
+
+  const deleteReview = (id) => {
+    return Review.deleteOne( { _id:id } );
+  }
+
+  const updateReview = (id, changes) => {
+    return Review.updateOne({ _id: id }, changes);
+  }
   // let saveToDB = (model) => {
   //   var product = new Product({
   //     uniqueID: model.uniqueID,
@@ -134,10 +142,12 @@ db.once('open', () => {
   // })
 
   // module.exports.seed = seed;
+  module.exports.updateReview = updateReview;
+  module.exports.deleteReview = deleteReview;
   module.exports.addHelpfulRating = addHelpfulRating;
   module.exports.addUnhelpfulRating = addUnhelpfulRating;
-  module.exports.productSchema = productSchema;
-  module.exports.Product = Product;
+  // module.exports.productSchema = productSchema;
+  // module.exports.Product = Product;
   module.exports.getAllReviews = getAllReviews;
   module.exports.saveReviewToDB = saveReviewToDB;
   module.exports.getReviewsByProductID = getReviewsByProductID;

@@ -7,7 +7,7 @@ const app = express();
 const port = 4000;
 const path = require('path');
 const cors = require('cors');
-const db = require('../database/index.js');
+const db = require('../database/postgresdb.js');
 
 app.use(express.static(path.join(__dirname, '../client/dist')));
 // console.log('PATH: ', path.join(__dirname, 'build', 'index.html'))
@@ -21,6 +21,7 @@ app.use(express.json());
 
 app.get('/reviews', (req, res) => {
   req.query.productID = Number.parseInt(req.query.productID);
+  console.log('body: ', req.body);
   // console.log('1111111111111111');
   console.log('REQUEST IN SERVER: ', req.query);
   // db.getAllReviews()
@@ -57,8 +58,39 @@ app.post('/reviews', (req, res) => {
     });
 });
 
+app.delete('/reviews/:id', (req, res) => {
+  console.log('connected to backend with: ', req.params.id);
+  db.deleteReview(req.params.id)
+    .then((confirmation) => {
+      res.status(200).send(confirmation);
+    })
+    .catch((error) => {
+      console.log(error);
+      res.status(500).send('Error. Can not delete review');
+    });
+//  db.deleteReview()
+});
+
+app.put('/reviews/:id', (req, res) => {
+  // eslint-disable-next-line no-restricted-syntax
+  for (const item in req.query) {
+    if (!(item === 'reviewHeading' || item === 'reviewText' || item === 'reviewUsername' || item === 'reviewImages' || item === 'createdAt' || item === 'reviewRecommended')) {
+      req.query[item] = Number.parseInt(req.query[item]);
+    }
+  }
+  console.log(req.query);
+  db.updateReview(req.params.id, req.query)
+    .then((confirmation) => {
+      res.status(200).send(confirmation);
+    })
+    .catch((error) => {
+      console.log(error);
+      res.status(500).send('Error. Can not update review');
+    });
+});
+
 app.post('/helpful', (req, res) => {
-  db.addHelpfulRating(req.body.productID, req.body._id)
+  db.addHelpfulRating(req.body._id)
     .then((confirmation) => {
       res.status(200).send(confirmation);
     })
@@ -68,7 +100,7 @@ app.post('/helpful', (req, res) => {
 });
 
 app.post('/unhelpful', (req, res) => {
-  db.addUnhelpfulRating(req.body.productID, req.body._id)
+  db.addUnhelpfulRating(req.body._id)
     .then((confirmation) => {
       res.status(200).send(confirmation);
     })
