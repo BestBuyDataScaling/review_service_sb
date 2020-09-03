@@ -1,0 +1,16 @@
+{
+  "name": "review-writer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "loader.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "faker": "^5.1.0",
+    "fs": "0.0.1-security",
+    "moment": "^2.27.0"
+  }
+}
